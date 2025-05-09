@@ -34,11 +34,11 @@ def scrape_stream_link(query):
             all_links = page_soup.select("a[href]")
             for link in all_links:
                 href = link.get("href")
-                if any(key in href for key in STREAM_KEYWORDS):
+                if href and any(key in href for key in STREAM_KEYWORDS):
                     return href
-
         except Exception as e:
-            print(f"Error while scraping {base_url}: {e}")
+            print(f"Error scraping {base_url}: {e}")
             continue
 
     return None
+            
