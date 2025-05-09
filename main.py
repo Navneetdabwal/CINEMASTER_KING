@@ -8,8 +8,8 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "👋 Welcome to the Ultimate Movie Bot!\n\n"
-        "Just send the name of any movie (even newly released ones), and I'll try to find a streaming link for you.\n\n"
+        "👋 Welcome to the CINEMASTRO Bot!\n\n"
+        "Send any movie name and get a streaming link if available.\n\n"
         "____________________________________\n"
         "👨‍💻 *Bot Developer:* `『𝙉𝘼𝙑𝙉𝙀𝙀𝙏 𝘿𝘼𝘽𝙒𝘼𝙇』`\n"
         "____________________________________",
@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def movie_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     movie_name = update.message.text
-    await update.message.reply_text("🔍 Searching for a streamable version...")
+    await update.message.reply_text("🔍 Searching for the movie...")
 
     video_url = scrape_stream_link(movie_name)
 
@@ -43,6 +43,4 @@ app = ApplicationBuilder().token(BOT_TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, movie_handler))
 app.run_polling()
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+        
